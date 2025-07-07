@@ -1,0 +1,33 @@
+NAME: yday
+VERSION: 1.0.0
+DESCRIPTION: Minimal CLI tool that outputs the day of the year
+SYNOPSIS: yday [OPTIONS]
+USAGE: |
+  yday                   # Output current year day
+
+OPTIONS: None
+
+EXAMPLES:
+  - command: yday
+    description: Get today's day of the year
+    output: "123"
+
+DESCRIPTION_DETAILED: |
+  yday is a minimal command-line utility that outputs the current day of the year
+  as a number from 1 to 366 (accounting for leap years).
+  
+  The day of the year is calculated from January 1st (day 1) through December 31st
+  (day 365 or 366 in leap years).
+
+FUNCTIONS:
+  get_year_day:
+    description: Returns the current day of the year as an integer
+    returns: "int - Day of year (1-366)"
+    implementation: "Uses datetime.date.today().timetuple().tm_yday"
+
+AUTHOR: "Victor Matos"
+LICENSE: "CC0 1.0 Universal"
+REPOSITORY: "https://github.com/pynosaur/yday"
+BUGS: "Report bugs to: https://github.com/pynosaur/yday/issues"
+
+SEE_ALSO: None

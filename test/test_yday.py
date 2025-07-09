@@ -5,15 +5,13 @@ import datetime
 import unittest
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent.parent / "app"))
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from app.main import get_year_day
+from core.calculator import get_year_day
 
 class TestYearDay(unittest.TestCase):
     
     def test_today_matches(self):
-        """Ensure get_year_day returns the correct year day today"""
         expected = datetime.date.today().timetuple().tm_yday
         self.assertEqual(get_year_day(), expected)
 

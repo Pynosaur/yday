@@ -209,3 +209,8 @@ __marimo__/
 # Bazel output and cache
 bazel-*
 .cache/
+
+# Nuitka output and cache
+*.build/
+*.dist/
+*.onefile-build/

@@ -1,0 +1,19 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+genrule(
+    name = "yday",
+    srcs = ["main.py", "//app/core:calculator.py"],
+    outs = ["yday"],
+    cmd = "PYTHONPATH= PYTHONPATH=$(location //app/core:calculator.py):$$PYTHONPATH python3 -m PyInstaller --onefile $(location main.py) --name=yday --distpath=$(GENDIR)/app",
+    output_to_bindir = True,
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "app",
+    srcs = ["main.py"],
+    deps = [
+        "//app/core:calculator",
+    ],
+    visibility = ["//visibility:public"],
+) 

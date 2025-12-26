@@ -1,0 +1,15 @@
+NAME: yday
+VERSION: "0.1.0"
+DESCRIPTION: >
+  Prints the current day of the year (1-366).
+USAGE:
+  - "yday"
+  - "yday --help"
+  - "yday --version"
+OPTIONS:
+  - "-h, --help        Show help message"
+  - "-v, --version     Show version information"
+OUTPUT: Integer day-of-year (1-366)
+AUTHOR: "@spacemany2k38"
+DATE: "2025-12-24"
+NOTES: []

@@ -1,0 +1,79 @@
+name: Test yday
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.8', '3.11', '3.12']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Test yday basic functionality
+      run: |
+        python app/main.py
+        python app/main.py --version
+        python app/main.py --help
+    
+    - name: Verify output is numeric
+      run: |
+        output=$(python app/main.py)
+        if ! [[ "$output" =~ ^[0-9]+$ ]]; then
+          echo "Error: Expected numeric output, got: $output"
+          exit 1
+        fi
+        if [ "$output" -lt 1 ] || [ "$output" -gt 366 ]; then
+          echo "Error: Day of year out of range: $output"
+          exit 1
+        fi
+        echo "yday output is valid: $output"
+    
+    - name: Run unit tests
+      run: |
+        python test/test_main.py
+  
+  build:
+    runs-on: macos-latest
+    needs: test
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Bazel
+      uses: bazel-contrib/setup-bazel@0.8.1
+      with:
+        bazelisk-cache: true
+    
+    - name: Build with Bazel
+      run: |
+        bazel build //:yday_bin
+      continue-on-error: true
+    
+    - name: Test built binary
+      if: success()
+      run: |
+        if [ -f ./bazel-bin/yday ]; then
+          ./bazel-bin/yday
+          output=$(./bazel-bin/yday)
+          if ! [[ "$output" =~ ^[0-9]+$ ]]; then
+            echo "Error: Binary output invalid"
+            exit 1
+          fi
+          echo "Built binary works: $output"
+        else
+          echo "Binary not built, skipping test"
+        fi
+

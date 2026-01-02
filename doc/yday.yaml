@@ -1,5 +1,5 @@
 NAME: yday
-VERSION: "0.1.0"
+VERSION: "0.1.1"
 DESCRIPTION: >
   Prints the current day of the year (1-366) using the system's local date/time. Handles leap years; outputs 366 on leap-day years. Intended for scripting where a simple day-of-year integer is needed.
 USAGE:

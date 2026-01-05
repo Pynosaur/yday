@@ -12,7 +12,13 @@ if __name__ == "__main__" and __package__ is None:
     __package__ = "app"
 
 from app import __version__
-from app.core.date_calc import get_day_of_year
+from app.core.date_calc import (
+    get_day_of_year,
+    get_week_of_year,
+    get_day_name,
+    get_month_calendar,
+    get_complete_date
+)
 from app.utils.doc_reader import read_app_doc
 
 
@@ -30,6 +36,10 @@ def print_help():
     print("\nOPTIONS:")
     print("    -h, --help        Show help message")
     print("    -v, --version     Show version information")
+    print("    -w                Show week of the year")
+    print("    -n                Show full name of the day in lowercase (localized)")
+    print("    -m                Show calendar for current month")
+    print("    -c                Show complete date/time")
 
 
 def print_version():
@@ -52,6 +62,22 @@ def main():
 
     if args[0] in ("-v", "--version"):
         print_version()
+        return 0
+
+    if args[0] == "-w":
+        print(get_week_of_year())
+        return 0
+
+    if args[0] == "-n":
+        print(get_day_name())
+        return 0
+
+    if args[0] == "-m":
+        print(get_month_calendar())
+        return 0
+
+    if args[0] == "-c":
+        print(get_complete_date())
         return 0
 
     # Unknown arg

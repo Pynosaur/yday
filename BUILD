@@ -9,6 +9,7 @@ genrule(
             --onefile-tempdir-spec=/tmp/nuitka-yday \
             --no-progressbar \
             --assume-yes-for-downloads \
+            --no-deployment-flag=self-execution \
             --output-dir=$$(dirname $(location yday)) \
             --output-filename=yday \
             $(location app/main.py)

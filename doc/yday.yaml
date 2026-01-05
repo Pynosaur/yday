@@ -1,16 +1,28 @@
 NAME: yday
-VERSION: "0.1.1"
+VERSION: "0.1.2"
 DESCRIPTION: >
   Prints the current day of the year (1-366) using the system's local date/time. Handles leap years; outputs 366 on leap-day years. Intended for scripting where a simple day-of-year integer is needed.
 USAGE:
   - "yday"
+  - "yday -w"
+  - "yday -n"
+  - "yday -m"
+  - "yday -c"
   - "yday --help"
   - "yday --version"
 OPTIONS:
   - "-h, --help        Show help message"
   - "-v, --version     Show version information"
+  - "-w                Show week of the year"
+  - "-n                Show full name of the day in lowercase (localized)"
+  - "-m                Show calendar for current month"
+  - "-c                Show complete date/time"
 EXAMPLES:
   - "yday               # Print current day-of-year"
+  - "yday -w            # Print week of year"
+  - "yday -n            # Print day name"
+  - "yday -m            # Print monthly calendar"
+  - "yday -c            # Print complete date/time"
   - "yday --version     # Show version"
 OUTPUT: >
   Integer day-of-year (1-366). Exit code 0 on success; non-zero on argument errors.

@@ -14,7 +14,7 @@ from app.core.date_calc import get_day_of_year
 
 class TestYday(unittest.TestCase):
     """Test cases for yday command."""
-    
+
     def test_day_range(self):
         """Test that day of year is in valid range (1-366)."""
         day = get_day_of_year()

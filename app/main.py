@@ -25,10 +25,10 @@ from app.utils.doc_reader import read_app_doc
 def print_help():
     """Print help message from documentation."""
     doc = read_app_doc('yday')
-    
+
     desc = doc.get('description', 'prints the current day of the year (1-366)')
     usage = doc.get('usage', ['yday', 'yday --help', 'yday --version'])
-    
+
     print(f"yday - {desc}")
     print("\nUSAGE:")
     for u in usage:

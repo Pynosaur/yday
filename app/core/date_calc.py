@@ -44,35 +44,40 @@ def get_month_calendar():
     year = today.year
     month = today.month
     current_day = today.day
-    
+
     # Get the calendar text
     cal = calendar.TextCalendar(calendar.SUNDAY)
     cal_text = cal.formatmonth(year, month)
-    
+
     # Highlight the current day using ANSI escape codes
     # ANSI codes: \033[7m for reverse video (highlight), \033[0m to reset
     lines = cal_text.split('\n')
     result_lines = []
-    
+
     for line in lines:
         # Skip header lines (month/year and day names)
-        if any(day in line for day in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']) or str(year) in line.replace(' ', ''):
+        if (
+            any(day in line for day in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']) or
+            str(year) in line.replace(' ', '')
+        ):
             result_lines.append(line)
             continue
-        
+
         # For date lines, highlight the current day
-        # Need to be careful with spacing - days are right-aligned in 2-char or 3-char fields
+        # Need to be careful with spacing - days are right-aligned in 2-char or 3-char
+        # fields
         modified_line = line
-        
+
         # Try to find and highlight the current day
-        # Days are formatted as either " D" or "DD" (right-aligned in 3-char fields including space)
+        # Days are formatted as either " D" or "DD" (right-aligned in 3-char fields
+        # including space)
         import re
-        
+
         # Pattern to match day numbers (with surrounding spaces)
         # We need to preserve alignment, so we'll replace while keeping spacing
         day_str_1 = f' {current_day} '  # single digit with spaces
         day_str_2 = f' {current_day:2d} '  # right-aligned in 3-char field
-        
+
         if current_day < 10:
             # Single digit: look for " D " pattern
             pattern = f' {current_day} '
@@ -80,14 +85,14 @@ def get_month_calendar():
                 highlighted = f'\033[7m {current_day}\033[0m '
                 modified_line = modified_line.replace(pattern, highlighted, 1)
         else:
-            # Double digit: look for "DD " pattern  
+            # Double digit: look for "DD " pattern
             pattern = f'{current_day} '
             if pattern in modified_line:
                 highlighted = f'\033[7m{current_day}\033[0m '
                 modified_line = modified_line.replace(pattern, highlighted, 1)
-        
+
         result_lines.append(modified_line)
-    
+
     return '\n'.join(result_lines)
 
 
@@ -98,6 +103,6 @@ def get_complete_date():
     tz_name = now.strftime('%Z')
     if not tz_name:
         tz_name = 'UTC'
-    
+
     # Format: Day Mon DD HH:MM:SS TZ YYYY
     return now.strftime(f'%a %b %_d %H:%M:%S {tz_name} %Y')

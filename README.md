@@ -2,7 +2,7 @@
 
 Simple tool that prints the current day of the year.
 
-Version: 0.1.2
+Version: 0.1.3
 
 ## Usage
 

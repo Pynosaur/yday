@@ -21,7 +21,10 @@ def get_week_of_year():
 
 
 def get_day_name():
-    """Return the full name of the current day in lowercase (localized according to system)."""
+    """
+    Return the full name of the current day in lowercase (localized according to
+    system).
+    """
     today = datetime.date.today()
     # Try to use system locale for localized day names
     try:
@@ -39,7 +42,9 @@ def get_day_name():
 
 
 def get_month_calendar():
-    """Return a formatted calendar for the current month with current day highlighted."""
+    """
+    Return a formatted calendar for the current month with current day highlighted.
+    """
     today = datetime.date.today()
     year = today.year
     month = today.month

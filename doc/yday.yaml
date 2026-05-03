@@ -18,12 +18,12 @@ OPTIONS:
   - "-m                Show calendar for current month"
   - "-c                Show complete date/time"
 EXAMPLES:
-  - "yday               # Print current day-of-year"
-  - "yday -w            # Print week of year"
-  - "yday -n            # Print day name"
-  - "yday -m            # Print monthly calendar"
-  - "yday -c            # Print complete date/time"
-  - "yday --version     # Show version"
+  - "yday                    # Print current day-of-year"
+  - "yday -w                 # Print week of year"
+  - "yday -n                 # Print day name"
+  - "yday -m                 # Print monthly calendar"
+  - "yday -c                 # Print complete date/time"
+  - "yday --version          # Show version"
 OUTPUT: >
   Integer day-of-year (1-366). Exit code 0 on success; non-zero on argument errors.
 AUTHOR: "@spacemany2k38"
